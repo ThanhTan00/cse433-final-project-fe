@@ -1,12 +1,19 @@
-import { newProductData, productData, updateProductData } from "../../../BLL/type";
+import {
+  newProductData,
+  productData,
+  updateProductData,
+} from "../../../BLL/type";
 import { useForm } from "react-hook-form";
 import { ValidationError } from "./ValidationError";
-import { addProduct, getProductById, updateProduct } from "../../../DAL/productDataAccess";
+import {
+  addProduct,
+  getProductById,
+  updateProduct,
+} from "../../../DAL/productDataAccess";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 export default function EditProduct() {
-
   const { id } = useParams();
 
   const initialState = {
@@ -24,15 +31,16 @@ export default function EditProduct() {
     getProductById(id).then((data) => {
       setProduct(data);
     });
-  });
+  }, [id]);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitSuccessful },
-  } = useForm<updateProductData>();
+  } = useForm<productData>();
 
-  async function handleUpdate(updateProductData: updateProductData) {
+  async function handleUpdate(updateProductData: productData) {
+    console.log(updateProductData);
     const newPost = await updateProduct(updateProductData);
     console.log(newPost);
   }
@@ -44,23 +52,47 @@ export default function EditProduct() {
       <div className="row">
         <div className="col"></div>
         <div className="col-md-4">
-          <img src={product.image} alt="pic" className="img-fluid" />        </div>
+          <img src={product.image} alt="pic" className="img-fluid" />{" "}
+        </div>
         <div className="col-md-4">
-          <form
-            noValidate
-            onSubmit={handleSubmit(handleUpdate)}
-            encType="multipart/form-data"
-            method="post"
-          >
+          <form noValidate onSubmit={handleSubmit(handleUpdate)} method="post">
+            <div className="mb-3">
+              <label htmlFor="id" className="form-label">
+                Product ID:
+              </label>
+              <input
+                id="id"
+                type="number"
+                className="form-control"
+                value={product.id}
+                readOnly
+                {...register("id")}
+                autoFocus
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="image" className="form-label">
+                Image:
+              </label>
+              <input
+                className="form-control"
+                id="image"
+                type="text"
+                value={product.image}
+                {...register("image")}
+                readOnly
+              />
+            </div>
             <div className="mb-3">
               <label htmlFor="name" className="form-label">
-                Product Name
+                Product Name:
               </label>
               <input
                 type="text"
                 className="form-control"
                 id="name"
                 defaultValue={product.name}
+                placeholder="Rename this product"
                 {...register("name", { required: "Product must have a name" })}
               />
               <ValidationError fieldError={errors.name}></ValidationError>
@@ -68,7 +100,7 @@ export default function EditProduct() {
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label htmlFor="price" className="form-label">
-                  Price $
+                  Price: {product.price}
                 </label>
                 <input
                   type="number"
@@ -83,7 +115,7 @@ export default function EditProduct() {
               </div>
               <div className="col-md-6 mb-3">
                 <label htmlFor="category" className="form-label">
-                  Category
+                  Category: {product.category}
                 </label>
                 <select
                   id="category"
@@ -92,9 +124,7 @@ export default function EditProduct() {
                   {...register("category")}
                   defaultValue={product.category}
                 >
-                  <option value="women">
-                    Women
-                  </option>
+                  <option value="women">Women</option>
                   <option value="men">Men</option>
                   <option value="bag">Bag</option>
                   <option value="shoes">Shoes</option>
@@ -132,10 +162,17 @@ export default function EditProduct() {
               />
               <ValidationError fieldError={errors.imageData}></ValidationError>
             </div> */}
-
-            <button type="submit" className="btn btn-primary">
-              UPDATE
-            </button>
+            <div className="d-flex justify-content-between">
+              <button type="submit" className="btn btn-primary">
+                UPDATE
+              </button>
+              <NavLink
+                to={"/admin/product-management"}
+                className="btn btn-secondary"
+              >
+                Cancel
+              </NavLink>
+            </div>
           </form>
         </div>
         <div className="col"></div>

@@ -27,7 +27,7 @@ function Slider2() {
                   data-delay="800"
                 >
                   <h2 className="ltext-201 cl0 p-t-19 p-b-43 respon1">
-                    TAN'SHOES
+                    TAN'STORE
                   </h2>
                 </div>
                 <div

@@ -2,8 +2,8 @@ import MUIDataTable from "mui-datatables";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { productData } from "../../../BLL/type";
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../../../DAL/productDataAccess";
-import { NavLink } from "react-router-dom";
+import { deleteProduct, getAllProducts } from "../../../DAL/productDataAccess";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toHaveDisplayValue } from "@testing-library/jest-dom/matchers";
 
 const columns = [
@@ -38,22 +38,30 @@ const columns = [
     options: {
       customBodyRender: (value: number) => (
         <>
-          <NavLink to={`edit/${value}`} type="button" className="btn btn-primary mr-2">
+          <NavLink
+            to={`edit/${value}`}
+            type="button"
+            className="btn btn-primary mr-2"
+          >
             Edit
           </NavLink>
-          <button
-            data-toggle="modal"
-            data-target="#deleteConfirmModal"
-            type="button"
+          <div
+            onClick={() => handleDelete(value)}
+            typeof="button"
             className="btn btn-primary"
           >
             Delete
-          </button>
+          </div>
         </>
       ),
     },
   },
 ];
+
+async function handleDelete(id: number) {
+  console.log(id);
+  const response = deleteProduct(id);
+}
 
 const options = {
   selectableRow: false,
@@ -87,6 +95,7 @@ export default function ManageProduct() {
       setProducts(data);
     });
   }, []);
+
   return (
     <>
       <div className="mt-2">

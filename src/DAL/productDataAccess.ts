@@ -7,7 +7,7 @@ async function getAllProducts() {
 }
 
 async function getProductById(id:any) {
-    const response = await axios.get(`http://localhost:8080/api/products/${id}`);
+    const response = await axios.get('http://localhost:8080/api/products/' + id);
     return response.data;
 }
 
@@ -25,4 +25,8 @@ async function updateProduct(updateProduct: updateProductData) {
   return response.data;
 }
 
-export {getAllProducts, getProductById, addProduct, updateProduct}
+async function deleteProduct(id:number) {
+    axios.delete('http://localhost:8080/api/products/'+id);
+    return true;
+}
+export {getAllProducts, getProductById, addProduct, updateProduct, deleteProduct}

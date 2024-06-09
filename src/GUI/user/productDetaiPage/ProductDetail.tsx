@@ -22,7 +22,7 @@ export default function ProductDetail() {
     getProductById(id).then((data) => {
       setProduct(data);
     });
-  });
+  }, [id]);
 
   return (
     <>
