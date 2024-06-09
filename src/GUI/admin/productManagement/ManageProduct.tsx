@@ -4,6 +4,7 @@ import { productData } from "../../../BLL/type";
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../../../DAL/productDataAccess";
 import { NavLink } from "react-router-dom";
+import { toHaveDisplayValue } from "@testing-library/jest-dom/matchers";
 
 const columns = [
   {
@@ -32,11 +33,12 @@ const columns = [
     label: "Price",
   },
   {
-    name: "Custom",
+    name: "id",
+    label: "Custom",
     options: {
-      customBodyRender: () => (
+      customBodyRender: (value: number) => (
         <>
-          <NavLink to={"edit"} type="button" className="btn btn-primary mr-2">
+          <NavLink to={`edit/${value}`} type="button" className="btn btn-primary mr-2">
             Edit
           </NavLink>
           <button

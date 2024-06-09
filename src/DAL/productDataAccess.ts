@@ -1,5 +1,5 @@
 import axios from "axios";
-import { newProductData } from "../BLL/type";
+import { newProductData, productData, updateProductData } from "../BLL/type";
 
 async function getAllProducts() {
     const response = await axios.get(`http://localhost:8080/api/products`);
@@ -20,4 +20,9 @@ async function addProduct(newProduct: newProductData) {
     return response.data;
 }
 
-export {getAllProducts, getProductById, addProduct}
+async function updateProduct(updateProduct: updateProductData) {
+  const response = await axios.put('http://localhost:8080/api/products', updateProduct)
+  return response.data;
+}
+
+export {getAllProducts, getProductById, addProduct, updateProduct}

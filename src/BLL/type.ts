@@ -15,6 +15,13 @@ export type newProductData = {
     imageData: File,
 }
 
+export type updateProductData = {
+    id: number;
+    name: string;
+    category: string;
+    price: number;
+    description: string;
+}
 export type User = {
     id: string;
     username: string;
