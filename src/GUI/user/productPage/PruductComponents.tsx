@@ -1,4 +1,4 @@
-import React from "react";
+import { NavLink } from "react-router-dom";
 import { productData } from "../../../BLL/type";
 
 type Props = {
@@ -21,12 +21,12 @@ function ProductList({ products }: Props) {
               <div className="block2-pic hov-img0">
                 <img src={product.image} alt="IMG-PRODUCT" />
 
-                <a
-                  href="#"
+                <NavLink
+                  to={`/shop/${product.id}`}
                   className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
                 >
                   Quick View
-                </a>
+                </NavLink>
               </div>
 
               <div className="block2-txt flex-w flex-t p-t-14">
@@ -48,12 +48,12 @@ function ProductList({ products }: Props) {
                   >
                     <img
                       className="icon-heart1 dis-block trans-04"
-                      src="images/icons/icon-heart-01.png"
+                      src="/images/icons/icon-heart-01.png"
                       alt="ICON"
                     />
                     <img
                       className="icon-heart2 dis-block trans-04 ab-t-l"
-                      src="images/icons/icon-heart-02.png"
+                      src="/images/icons/icon-heart-02.png"
                       alt="ICON"
                     />
                   </a>
