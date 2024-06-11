@@ -9,6 +9,8 @@ import Dashboard from "../admin/dashboardPage/Dashboard";
 import ManageProduct from "../admin/productManagement/ManageProduct";
 import AddProduct from "../admin/productManagement/AddProduct";
 import EditProduct from "../admin/productManagement/EditProduct";
+import ManageUser from "../admin/UserManagement/ManageUser";
+import AddUser from "../admin/UserManagement/AddUser";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +59,19 @@ const router = createBrowserRouter([
             element: <EditProduct />,
           },
         ],
+      },
+      {
+        path: "user-management",
+        children: [
+          {
+            index: true,
+            element: <ManageUser />
+          },
+          {
+            path: "add",
+            element: <AddUser />
+          }
+        ]
       },
     ],
   },

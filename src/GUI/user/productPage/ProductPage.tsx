@@ -6,7 +6,9 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function ProductPage() {
   const [products, setProducts] = useState<productData[]>([]);
+  
   const [filteredProducts, setFilteredProducts] = useState<productData[]>([]);
+
   useEffect(() => {
     getAllProducts().then((data) => {
       setProducts(data);

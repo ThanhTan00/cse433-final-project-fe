@@ -35,10 +35,10 @@ export default function AdminLayout() {
             <hr className="sidebar-divider my-0" />
 
             <li className="nav-item active">
-              <a className="nav-link" href="index.html">
+              <NavLink className="nav-link" to={"/admin"}>
                 <i className="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
-              </a>
+              </NavLink>
             </li>
 
             <hr className="sidebar-divider" />

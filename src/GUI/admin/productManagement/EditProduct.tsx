@@ -106,7 +106,7 @@ export default function EditProduct() {
                   type="number"
                   className="form-control"
                   id="price"
-                  defaultValue={product.price}
+                  value={product.price}
                   {...register("price", {
                     required: "Product must have a price",
                   })}
